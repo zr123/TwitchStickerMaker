@@ -23,7 +23,12 @@ if __name__ == '__main__':
     for image in images:
         emote_id = image.get("data-image-id")
         emote_name = image.get("data-regex")
+        emote_src = image.get("src")
+        emote_src = emote_src.replace("/2.0", "/3.0") # get high resolution image
         if emote_id is not None:
             # download sticker
             print(f"Downloading {emote_name}")
-            wget.download(f"https://static-cdn.jtvnw.net/emoticons/v1/{emote_id}/3.0", f"stickers/{emote_name}.png")
+            if emote_src.count("animated") > 0:
+                wget.download(emote_src, f"stickers/{emote_name}.gif")
+            else:
+                wget.download(emote_src, f"stickers/{emote_name}.png")
