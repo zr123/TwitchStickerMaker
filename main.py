@@ -1,5 +1,6 @@
 from bs4 import BeautifulSoup
 import wget
+import os
 
 
 if __name__ == '__main__':
@@ -10,17 +11,20 @@ if __name__ == '__main__':
 
     # step 2: download index.html from channel-page
 
-    wget.download(f"https://www.twitchemotes.com/channels/{channel_id}/", "downloads/channel_index.html")
+    filename = wget.download(f"https://www.twitchemotes.com/channels/{channel_id}/", "downloads/index.html")
 
-    with open("downloads/channel_index.html", "r") as file:
+    with open(filename, "r") as file:
         channel_index = "".join(file.readlines())
 
     # step 3: parse
     soup = BeautifulSoup(channel_index, 'html.parser')
     images = soup.find_all("img")
 
+    # cleanup
+    os.remove(filename)
+
     # step 4: download
-    for image in images:
+    for image in images[1:]:
         emote_id = image.get("data-image-id")
         emote_name = image.get("data-regex")
         emote_src = image.get("src")
@@ -32,3 +36,5 @@ if __name__ == '__main__':
                 wget.download(emote_src, f"stickers/{emote_name}.gif")
             else:
                 wget.download(emote_src, f"stickers/{emote_name}.png")
+        else:
+            #pass # TODO: could be a badge!
