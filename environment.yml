@@ -1,0 +1,8 @@
+name: tsm
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python
+  - pywget
+  - beautifulsoup4
