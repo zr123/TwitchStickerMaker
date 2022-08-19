@@ -37,4 +37,4 @@ if __name__ == '__main__':
             else:
                 wget.download(emote_src, f"stickers/{emote_name}.png")
         else:
-            #pass # TODO: could be a badge!
+            pass    # TODO: could be a badge!
