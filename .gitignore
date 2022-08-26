@@ -1,2 +1,4 @@
 .idea
 *.html
+__pycache__
+downloads/*
