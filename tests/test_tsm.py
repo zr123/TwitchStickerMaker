@@ -60,5 +60,5 @@ def test_download_all_emotes():
 
 
 def test_cmdlet():
-    result = subprocess.run('python ../tsm.py 40972890')
+    result = subprocess.run('python tsm.py 40972890')
     assert result.returncode == 0
