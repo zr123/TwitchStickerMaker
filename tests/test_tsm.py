@@ -59,6 +59,5 @@ def test_download_all_emotes():
     tsm.download_all_emotes(data)
 
 
-def test_cmdlet():
-    result = subprocess.run('python tsm.py 40972890')
-    assert result.returncode == 0
+def test_download_channel_emotes():
+    tsm.download_channel_emotes(channel_id=40972890)
